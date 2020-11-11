@@ -1,0 +1,13 @@
+{
+    "name": "anwar",
+    "weekOneMonday": ["Biology", "Supervised Study", "", "Maths", ""],
+    "weekOneTuesday": ["", "Biology", "", "Computer Science", "Maths"],
+    "weekOneWednesday": ["Computer Science", "Maths", "Supervised Study", "Computer Science", "Biology"],
+    "weekOneThursday": ["Supervised Study", "Supervised Study", "Maths", "Maths", "Computer Science"],
+    "weekOneFriday": ["Biology", "Computer Science", "", "", ""],
+    "weekTwoMonday": ["Biology", "", "", "", "Maths"],
+    "weekTwoTuesday": ["", "Biology", "", "Computer Science", ""],
+    "weekTwoWednesday": ["Computer Science", "Maths","Biology", "", ""],
+    "weekTwoThursday": ["Maths", "Computer Science", "", "", "Biology"],
+    "weekTwoFriday": ["Biology", "Computer Science", "Maths", "", ""]
+}
