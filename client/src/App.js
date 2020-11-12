@@ -1,5 +1,4 @@
 import React from "react"
-import './App.css';
 import { Switch, Route } from "react-router-dom"
 import MainPage from "./pages/mainPage/MainPage"
 
@@ -8,7 +7,7 @@ function App() {
         <Switch>
             <Route path="/" exact={ true } component={ MainPage } />
         </Switch>
-    )
-}
+    );
+};
 
 export default App;
