@@ -1,0 +1,22 @@
+body {
+    
+}
+.icon {
+    position: relative;
+    display: flex;
+    padding: 20px;
+    height: 70px;
+    left: 20%;
+    top: 30%;
+}
+.username-input {
+    text-decoration: none;
+}
+.login-form input {
+    position: relative;
+    display: flex inline;
+    top: 20%;
+    left: 60%;
+    padding: 10px;
+    margin: 10px;
+}

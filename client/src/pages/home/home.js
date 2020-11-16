@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
-export function dashboard({
+
+export default function main({
     history
 }) {
-    useEffect( () => {
+    // useEffect( () => {
 
-    })
+    // })
     return (
         <div>
             <h1>Dashboard Page</h1>
