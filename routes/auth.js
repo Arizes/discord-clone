@@ -16,18 +16,21 @@ router.get("/", (req, res) => {
 router.post("/login", passport.authenticate("local", {
     failureRedirect: "/api/auth/logout",
 }), (req, res) => {
-    res.redirect("http://localhost:3000/home")
+    res.header("Access-Control-Allow-Origin", "*");
+    res.redirect("/api/auth/login")
 });
 
-/*router.get("/login", (req, res) => {
+router.get("/login", (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
     if (req.user) {
         res.redirect("http://localhost:3000/home")
     } else {
         res.redirect("http://localhost:3000/")
     }
-})*/
+})
 
 router.get("/logout", (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
     if (req.user) {
         req.logout()
         res.redirect("http://localhost:3000/")
