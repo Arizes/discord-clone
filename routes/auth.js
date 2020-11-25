@@ -21,21 +21,19 @@ router.post("/login", passport.authenticate("local", {
 });
 
 router.get("/login", (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
     if (req.user) {
         res.redirect("http://localhost:3000/home")
     } else {
-        res.redirect("http://localhost:3000/")
+        res.redirect("http://localhost:3000")
     }
 })
 
 router.get("/logout", (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
     if (req.user) {
         req.logout()
-        res.redirect("http://localhost:3000/")
+        res.redirect("http://localhost:3000")
     } else {
-        res.redirect("http://localhost:3000/")
+        res.redirect("http://localhost:3000")
     }
 })
 router.post("/register", async (req, res) => {
@@ -49,10 +47,10 @@ router.post("/register", async (req, res) => {
                 username: req.body.username,
                 password: hashedPassword })
             newData.save()
-            res.redirect("/")
+            res.redirect("http://localhost:3000/home")
         }
         if (userDetails) {
-            res.redirect("http://localhost:3000/")
+            res.redirect("http://localhost:3000")
         }
     } catch(err) {
         console.log(err)

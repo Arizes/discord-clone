@@ -23,8 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use( cors( {
-  origin: 'http://localhost:3000/',
-  credentials: true,
+  origin: '*' ,
 }))
 
 app.use(session({
@@ -41,12 +40,13 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/api", routes);
+app.use("/api", cors(), routes);
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-// }
-// );
+app.get('*', (req, res) => {
+  //res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000")
+  //res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+}
+);
 
 const PORT = 3001
 app.listen(PORT, () => {

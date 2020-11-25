@@ -3,5 +3,5 @@ const axios = require('axios')
 
 export function authenticate(username, password) {
     axios.post(`http://localhost:3001/api/auth/login`, { 
-        username, password, header: { "Access-Control-Allow-Origin": "Origin" }})
+        username, password, header: { "Access-Control-Allow-Origin": '*' }})
 };
