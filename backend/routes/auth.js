@@ -1,42 +1,38 @@
-const router                 = require("express").Router();
-const bcrypt                 = require('bcrypt');
-const { nanoid }             = require('nanoid');
-const passport               = require("passport");
-const user                   = require("../models/user");
-const { passportInitialize } = require("../passport/passport-config");
-const { logout } = require("../middleware/auth")
-const { auth } = require("../controllers/auth")
+const router = require("express").Router();
+const passport = require("passport");
+const middleware = require("../middleware/auth")
 
-router.get("/", auth)
+router.get("/", middleware.checkIfLoggedIn, (req, res) => {
+    res.render("loginPage", { title: "Login" })
+})
 
-router.post("/login", passport.authenticate("local", {
-    failureRedirect: "/",
+router.post("/login", passport.authenticate("signIn", {
     successRedirect: "/home",
-    failureFlash: "Error"
-    })
+}, (req, res, next) => {
+    if (req.user) {
+        next()
+    } else {
+        res.render("loginPage", { title: "SignIn Error", error: "Invalid Username or Password!" })
+    }
+})
 );
 
-router.get("/logout", logout)
+router.get("/logout", middleware.logout)
 
-router.post("/register", async (req, res) => {
-    try {
-        let userDetails = await user.findOne({ username: req.body.username })
-        if (!userDetails) {
-            const userId =  nanoid()
-            const hashedPassword = await bcrypt.hash(req.body.password, 10)
-            let newData = new user({
-                id: userId,
-                username: req.body.username,
-                password: hashedPassword })
-            newData.save()
-            res.redirect("/home")
-        }
-        if (userDetails) {
-            res.redirect("/")
-        }
-    } catch(err) {
-        console.log(err)
+router.get("/register", (req, res, next) => {
+    res.render("register", { title: "Register" })
+})
+router.post("/register", passport.authenticate("signUp", {
+    successRedirect: "/home"
+}, (res, req, next) => {
+    if (req.user) {
+        next();
+    } else {
+        res.render("register", { title: "SignUp Error", error: "Invalid Username or Password!" })
     }
-});
+})
+
+
+);
 
 module.exports = router;

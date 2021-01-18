@@ -2,7 +2,7 @@ const auth = (req, res, next) => {
     if (req.isAuthenticated()) {
         next();
     } else {
-        res.sendStatus(404).json({ message: "Not Authenticated" });
+        res.sendStatus(404).send({ message: "Not Authenticated" });
     };
 };
 const data = (req, res, next) => {
@@ -18,5 +18,11 @@ const logout = (req, res, next) => {
     };
     res.redirect("/");
 };
-
-module.exports = { auth, data, logout }
+const checkIfLoggedIn = (req, res, next) => {
+    if (req.user) {
+        res.redirect("/home")
+    } else {
+        next();
+    }
+}
+module.exports = { auth, data, logout, checkIfLoggedIn }

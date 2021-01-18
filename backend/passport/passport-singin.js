@@ -1,10 +1,10 @@
 const user  = require("../models/user");
-const local = require("passport-local").Strategy;
+const signIn = require("passport-local").Strategy;
 const bcrypt = require('bcrypt');
 
-function passportInitialize(passport) {
+function passportInitializeSignIn(passport) {
 
-passport.use( new local({ usernameField: "username" }, async (username, password, done) => {
+    passport.use( new signIn({ usernameField: "username" }, async (username, password, done) => {
         user.findOne({ username: username }, async (err, data) => {
             if (!data) return done(null, false)
             try {
@@ -17,15 +17,16 @@ passport.use( new local({ usernameField: "username" }, async (username, password
                 return done(err)
             }
         })
-})
-);
+        })
+    );
 
-passport.serializeUser((user, done) => { done(null, user.id) })
-passport.deserializeUser((id, done) => { 
-    user.findOne({ id }, async (err, data) => {
-        return done(null, data) 
-    })
-});
+    passport.serializeUser((user, done) => { done(null, user.id) })
+
+    passport.deserializeUser((id, done) => { 
+        user.findOne({ id }, async (err, data) => {
+            return done(null, data) 
+        })
+    });
 };
 
-module.exports = passportInitialize
+module.exports = passportInitializeSignIn

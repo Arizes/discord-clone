@@ -1,36 +1,32 @@
 import React, { Component } from 'react'
-//import { existingUserCheck } from '../../util/api';
-import "../assets/css/loginPage.css"
-import { authenticate } from '../util/api';
-//import title from "./title.png"
+import { authenticate } from './util/api';
 
-class MainPage extends Component{
+class loginPage extends Component {
+
     state = {
         username: "",
-        password: "",
-        error: ""
+        password: ""
     }
     changeHandler = (event) => {
+        console.log("here")
         let nam = event.target.name;
         let val = event.target.value;
         this.setState({[nam]: val})
+        console.log(nam, val)
     }
     authenticateUser = (e) => {
         e.preventDefault();
-        if (!this.state.password || !this.state.username) return this.setState({ error: "Incorrect" })
+        if (!this.state.password || !this.state.username) return this.props.error = "Incorrect"
         authenticate(this.state.username, this.state.password)
     }
     render () {
-        if (this.props.location.search === "?incorrect=true") {
-            this.setState({ error: "The username or password entered is incorrect"})
-        } 
 
         return (
             <div>
-               <img className="icon" alt="Logo" />
-                <form onSubmit={this.authenticateUser}/*action="http://localhost:3001/api/auth/login" method="POST"*/>
+                <title>{this.props.title}</title>
+                <form onSubmit={this.authenticateUser}>
                     <div>
-                        <h1>{this.state.error}</h1>
+                        <h1>{this.props.error}</h1>
                         <label htmlFor="name">Userame: </label>
                         <input id="username" name="username" type="text" className="username-input" onChange={this.changeHandler} />
                     </div>
@@ -44,4 +40,5 @@ class MainPage extends Component{
         );
     }
 }
-export default MainPage;
+
+export default loginPage;

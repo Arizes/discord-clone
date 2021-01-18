@@ -1,7 +1,6 @@
 const router = require("express").Router()
-const middleware = require("../middleware/auth")
-const { home } = require("../controllers/home")
+const controller = require("../controller/home.js")
 
-router.get("/", home)
+router.get("/", controller.home)
 
 module.exports = router;
