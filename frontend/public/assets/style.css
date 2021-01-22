@@ -7,7 +7,7 @@ body {
     background-size: cover;
     font-family: Whitney;
     text-rendering: optimizeLegibility;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.02em;
 }
 input {
     border-style: none;
@@ -120,7 +120,6 @@ input:hover {
     font-size: 12px;
     line-height: 16px;
     font-weight: 500;
-    flex: 1;
     position: relative;
     margin-top: 8px;
     top: 2px;
@@ -180,6 +179,8 @@ input:hover {
 }
 .leftside {
     float: left;
+}
+.rightside {
     position: fixed;
 }
 .boxSurround {
@@ -197,9 +198,29 @@ input:hover {
     height: 40px;
 }
 .box-left {
-    position: relative;
-    left: 835px; 
+    justify-content: center;
+    left: 835px
 }
-.rightside {
-    position: fixed;
+
+.noDisplay {
+    display: none;
+    font-style: italic;
+    font-family: Whitney;
+    font-style: 12px;
+    font-weight: 500;
+    text-transform: none;
+    line-height: 16px;
+    letter-spacing: 0.05em;
+    opacity: 0.9;
+}
+.redOverlay span {
+    display: inline;
+    color: var(--error) !important;
+}
+.redOverlay input {
+    box-shadow: 0px 0px 0px 1px var(--error) inset;
+}
+.addtop {
+    position: relative;
+    top: 10px;
 }
