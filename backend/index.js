@@ -1,55 +1,62 @@
 const express = require('express');
 const app = express();
-//const routes = require("./routes/index.js")
 const session = require('express-session');
-const passport = require('passport');
-const { join } = require('path');
 const mongoose = require("mongoose");
-const flash = require('express-flash');
 const bodyParser = require('body-parser');
-const passportInitializeSignIn = require("./passport/passport-singin");
-const passportInitializeSignUp = require("./passport/passport-signup")
-passportInitializeSignIn(passport);
-passportInitializeSignUp(passport);
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
-/* Importing routes */
-const auth = require("./routes/auth");
-const home = require("./routes/home");
+const passport = require('passport');
+require("./passport/passport-singin")
+
+/**
+ * Routes
+ */
+const router = require("./routes/index")
 
 mongoose.connect("mongodb+srv://arize:arize@cluster0.ig7ih.mongodb.net/data", { 
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-let options = { babel: {presets: ['@babel/preset-react', [ '@babel/preset-env', {'targets': {'node': 'current'}}]]} }
-app.set("views", __dirname + "/pages" );
-app.set("view engine", "jsx");
-app.engine('jsx', require('express-react-views').createEngine(options));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// let options = { babel: {presets: ['@babel/preset-react', [ '@babel/preset-env', {'targets': {'node': 'current'}}]]} }
+// app.set("views", __dirname + "/pages" );
+// app.set("view engine", "jsx");
+// app.engine('jsx', require('express-react-views').createEngine(options));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true,
+}))
+app.use(cookieParser());
 app.use(session({
-  secret: 'n@arize@arize',
+  secret: 'n@arize@',
   cookie: {
-    maxAge: 60000 * 60 * 24
+    maxAge: 86400000,
+    path: "/"
   },
   resave: false,
   saveUninitialized: false,
   name: "auth",
+  sameSite: "none"
   })
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(bodyParser.json());
 
-app.use("/", auth)
-app.use("/home", home)
-
+app.use("/api", router)
+app.use("*", async (req, res, next) => {
+	res.setHeader("access-control-allow-origin", "*");
+	next();
+});
 // app.get("/", (req, res) => {
 //   res.sendFile(join(__dirname, "..", "frontend", "public", "index.html"));
 // });
 
-const PORT = 3000
+const PORT = 3001
 app.listen(PORT, () => {
   console.log(`Mixing it up on port ${PORT}`)
 });

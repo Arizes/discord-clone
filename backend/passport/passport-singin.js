@@ -1,32 +1,38 @@
-const user  = require("../models/user");
 const signIn = require("passport-local").Strategy;
+const userSchema = require("../models/user");
 const bcrypt = require('bcrypt');
+const passport = require("passport");
 
-function passportInitializeSignIn(passport) {
-
-    passport.use( new signIn({ usernameField: "username" }, async (username, password, done) => {
-        user.findOne({ username: username }, async (err, data) => {
-            if (!data) return done(null, false)
+passport.use( new signIn({ usernameField: "username", passwordField: "password" }, async (username, password, done) => {
+    await userSchema.findOne({ username }, async (err, user) => {
+        if (!user) return done(null, false)
+        if (user) { 
             try {
-                if (await bcrypt.compare(password, data.password)) {
-                    return done(null, data)
+                console.log(user.id)
+                if (await bcrypt.compare(password, user.password)) {    
+                    return done(null, user)
                 } else {
                     return done(null, false)
                 }
             } catch (err) {
                 return done(err)
             }
+        }
         })
-        })
-    );
+    })
+);
 
-    passport.serializeUser((user, done) => { done(null, user.id) })
+passport.serializeUser((user, done) => { 
+    done(null, user.id) 
+})
 
-    passport.deserializeUser((id, done) => { 
-        user.findOne({ id }, async (err, data) => {
-            return done(null, data) 
-        })
-    });
-};
-
-module.exports = passportInitializeSignIn
+passport.deserializeUser( async (id, done) => { 
+    console.log(id)
+    try {
+        const user = await userSchema.findOne({id});
+        return user ? done(null, user) : done(null, null)
+    } catch (err) {
+        console.log(err)
+        done(err, null)
+    }
+});

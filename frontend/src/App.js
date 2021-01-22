@@ -1,12 +1,14 @@
-import React             from "react"
+import React from "react"
 import { Switch, Route } from "react-router-dom"
-import loginPage         from "./pages/loginPage.jsx"
-import main              from "./pages/home.jsx"
+import loginPage from "./pages/auth/loginPage.js"
+import app from "./pages/app.js"
+
 function App() {
-    return(
+    return (
         <Switch>
-            <Route path="/" exact={ true } component={ loginPage } />
-            <Route path="/home" exact component={main} />
+            <Route path="/" exact component={loginPage} />
+            <Route path="/app" exact component={app} />
+            <Route />
         </Switch>
     );
 };

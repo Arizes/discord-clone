@@ -1,33 +1,23 @@
 {
-  "name": "frontend",
+  "name": "src",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "babel": "babel src -d views",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
-  "plugins": [
-    [
-      "@babel/plugin-proposal-class-properties",
-      {
-        "loose": true
-      }
-    ]
-  ],
   "dependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
     "axios": "^0.21.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.1"
+    "react-scripts": "^4.0.1",
+    "socket.io": "^3.1.0"
   },
   "browserslist": {
     "production": [

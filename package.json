@@ -1,0 +1,20 @@
+{
+  "name": "anwartk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd frontend && react-scripts start && cd .. && cd backend && node index.js" 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arizes/anwartk.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Arizes/anwartk/issues"
+  },
+  "homepage": "https://github.com/Arizes/anwartk#readme"
+}
