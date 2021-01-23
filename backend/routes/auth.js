@@ -9,10 +9,6 @@ router.get("/", middleware.data)
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
     if (req.user) { 
-        req.login(req.user, function(err) {
-            if (err) console.log(err)
-        })
-        console.log(req.user.id)
         res.sendStatus(200)
     }
 })

@@ -1,0 +1,14 @@
+{
+  "extends": "@bluelovers/tsconfig/esm/mapfile.json",
+  "compilerOptions": {
+    "skipLibCheck": true
+  },
+  "exclude": [
+    "node_modules",
+    "./node_modules",
+    "./node_modules/*",
+    "**/node_modules/*",
+    "**/test/script/*",
+    "**/test/demo/*"
+  ]
+}

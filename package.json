@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cd frontend && react-scripts start && cd .. && cd backend && node index.js" 
+    "start": "cd frontend && react-scripts start && cd .. && cd backend && node index.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Arizes/anwartk/issues"
   },
-  "homepage": "https://github.com/Arizes/anwartk#readme"
+  "homepage": "https://github.com/Arizes/anwartk#readme",
+  "dependencies": {
+    "share-localhost": "^1.0.4"
+  }
 }

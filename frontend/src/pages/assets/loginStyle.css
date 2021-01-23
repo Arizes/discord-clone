@@ -1,0 +1,244 @@
+@import "./var.css";
+
+body {
+    font-family: Whitney;
+    letter-spacing: 0.02em;
+}
+.background {
+    background: url("download.png") no-repeat center center fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-size: cover;
+    position: absolute;
+    z-index: -1;
+}
+.inputfield {
+    border-style: none;
+    outline: none;
+    border-radius: 3px;
+    background-color: rgba(0,0,0,0.1);
+    padding-left: 10px;
+    padding-right: -10px;
+    margin: 10px;
+    margin-left: 0;
+    height: 40px;
+    width: 402px; 
+    position: relative;
+    top: 0px;
+    font-size: 16px;
+    color: var(--textnormal);
+    font-family: Whitney,Helvetica Neue,Helvetica,Arial,sans-serif;
+    text-rendering: optimizeLegibility;
+    font-weight: 200;
+    text-transform: none;
+    word-spacing: normal;
+    letter-spacing: normal;
+    box-shadow: 0px 0px 0px 1px var(--discorddark) inset;
+    transition: box-shadow .2s ease-in-out;
+}
+.password-input {
+    height: 38px;
+}
+*:focus {
+    outline: none;
+    border-style: none;
+}
+.inputfield:focus {
+    /*outline: 1px solid var(--blurple);*/
+    box-shadow: 0px 0px 0px 1px var(--blurple) inset;
+}
+.inputfield:not(:focus):not(.redOverlay):hover {
+    box-shadow: 0px 0px 0px 1px var(--bordercolor) inset;
+}
+.discord-img {
+    position: relative;
+    top: 10px;
+    left: 10px;
+    height: 50px;
+    user-select: none;
+    cursor: pointer;
+
+}
+.boxSurround {
+    position: absolute;
+    background-color: var(--discordNormalColor);
+    left: 135px;
+    width: 479px;
+    padding: 32px;
+    font-size: 18px;
+    height: 408px;
+    box-shadow: 0 2px 10px 0 rgba(0,0,0,.2);
+    border-radius: 5px;
+    box-sizing: border-box; 
+    user-select: none;
+    top: 281px;
+    left: 348px;
+}
+.login-btn {
+    position: relative;
+    cursor: pointer;
+    width: 414px;
+    height: 44px;
+    margin-bottom: 8px;
+    padding: 10px;
+    border-radius: 3px;
+    box-sizing: border-box;
+    justify-content: center;
+    border-style: none;
+    background-color: var(--blurple);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    transition: background-color .17s ease,color .17s ease;
+}
+.bluebtn {
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 8px;
+    padding: 10px;
+    border-radius: 3px;
+    box-sizing: border-box;
+    justify-content: center;
+    border-style: none;
+    background-color: var(--blurple);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    transition: background-color .17s ease,color .17s ease;
+}
+.login-btn:hover {
+    background-color: var(--button);
+    transition: background-color .17s ease,color .17s ease;
+}
+.btnhover:hover {
+    background-color: var(--button);
+    transition: background-color .17s ease,color .17s ease;
+}
+.login-btn:active {
+    background-color: #5b6eae;
+    transition: background-color .17s ease,color .17s ease;
+}
+.btnactive:active {
+    background-color: #5b6eae;
+    transition: background-color .17s ease,color .17s ease;
+}
+.textarea-title {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    position: relative;
+    margin-top: 8px;
+    position: relative;
+    top: 2px;
+    color: var(--grey-textchannel);
+    user-select: none;
+}
+.white-title {
+    position: relative;
+    color: #fff;
+    margin-bottom: 8px;
+    font-size: 24px;
+    line-height: 30px;
+    text-align: center;
+    font-weight: 510 !important;
+    font-style: normal;
+    outline: 0;
+    top: -2px;
+    left: -3px;
+}
+.greytext {
+    color: var(--greytext);
+    margin: 0;
+    text-align: center;
+    font-weight: 200;
+    opacity: 0.8;
+}
+.font16 {
+    font-size: 16px;
+    line-height: 20px;
+}
+.link {
+    position: relative;
+    appearance: button;
+    color: var(--blurple);
+    font-weight: 100;
+    line-height: 16px;
+    cursor: pointer;
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 20px;
+}
+.link:hover {
+    text-decoration: underline;
+}
+.font14 {
+    font-size: 14px;
+    font-weight: 400 !important;
+}
+.smalltext {
+    font-size: 14px;
+    line-height: 16px;
+    outline: 0;
+    margin: 0;
+    text-align: left;
+}
+.lighttext {
+    color: var(--lightgreytext);
+    padding-right: 5px;
+    font-weight: 400;
+    opacity: 1;
+}
+.margintop {
+    margin-top: -4px;
+}
+.leftside {
+    float: left;
+}
+.boxSurround {
+    width: 784px;
+}
+.rightside {
+    position: absolute;
+    justify-content: center;
+    top: 385px;
+    left: 830px;
+}
+.fixbutton {
+    justify-content: center;
+    margin-top: 20px;
+    left: 2px;
+    width: 270px;
+    height: 40px;
+}
+.noDisplay {
+    display: none;
+    font-family: Whitney;
+    font-style: italic;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: none;
+    line-height: 16px;
+    letter-spacing: 0.05em;
+    opacity: 0.9;
+}
+.redOverlay span {
+    display: inline;
+    color: var(--error) !important;
+}
+.redOverlay input {
+    box-shadow: 0px 0px 0px 1px var(--error) inset;
+}
+.addtop {
+    position: relative;
+    top: 10px;
+}
+.forgottenpass {
+    width: 141px;
+    margin-bottom: 22px;
+}
+.button0 {
+    position: absolute;
+}

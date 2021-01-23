@@ -48,6 +48,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/api", router)
+
 app.use("*", async (req, res, next) => {
 	res.setHeader("access-control-allow-origin", "*");
 	next();

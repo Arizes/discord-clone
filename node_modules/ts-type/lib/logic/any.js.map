@@ -1,0 +1,1 @@
+{"version":3,"file":"any.js","sourceRoot":"","sources":["any.ts"],"names":[],"mappings":"","sourcesContent":["\n/**\n * @see https://stackoverflow.com/questions/49927523/disallow-call-with-any/49928360#49928360\n */\nexport type ITSLogicIsAny<T> = 0 extends (1 & T) ? true : false\n\nexport type ITSLogicNotAny<T> = true extends ITSLogicIsAny<T> ? false : true\n"]}
