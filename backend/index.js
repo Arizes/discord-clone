@@ -1,11 +1,10 @@
-const express = require('express');
-const app = express();
-const session = require('express-session');
+const express  = require('express');
+const app      = express();
+const session  = require('express-session');
+const Store    = require('connect-mongo')(session);
 const mongoose = require("mongoose");
-const bodyParser = require('body-parser');
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
-
+const cors     = require("cors");
+const path     = require("path")
 const passport = require('passport');
 require("./passport/passport-singin")
 
@@ -16,7 +15,8 @@ const router = require("./routes/index")
 
 mongoose.connect("mongodb+srv://arize:arize@cluster0.ig7ih.mongodb.net/data", { 
   useNewUrlParser: true,
-  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true
 });
 
 // let options = { babel: {presets: ['@babel/preset-react', [ '@babel/preset-env', {'targets': {'node': 'current'}}]]} }
@@ -24,26 +24,23 @@ mongoose.connect("mongodb+srv://arize:arize@cluster0.ig7ih.mongodb.net/data", {
 // app.set("view engine", "jsx");
 // app.engine('jsx', require('express-react-views').createEngine(options));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: ['http://localhost:3000'],
   credentials: true,
 }))
 
-app.use(cookieParser());
-app.use(session({
-  secret: 'n@arize@',
+app.use(session( {
+  secret: 'secret',
   cookie: {
-    maxAge: 86400000,
+      maxAge: 60000 * 10 * 24
   },
   resave: false,
   saveUninitialized: false,
   name: "auth",
-  samesite: "none"
-  })
-);
+  store: new Store({mongooseConnection: mongoose.connection })
+}))
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -55,11 +52,7 @@ app.use("*", async (req, res, next) => {
 	next();
 });
 
-// app.get("/", (req, res) => {
-//   res.sendFile(join(__dirname, "..", "frontend", "public", "index.html"));
-// });
-
-const PORT = 3001
+const PORT = 3000 || process.env.PORT
 app.listen(PORT, () => {
   console.log(`Mixing it up on port ${PORT}`)
 });

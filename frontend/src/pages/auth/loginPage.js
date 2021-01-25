@@ -55,13 +55,9 @@ class loginPage extends Component {
         console.log("here")
             //let auth = authenticate(this.state.username, this.state.password)
             axios.post(`http://localhost:3001/api/auth/login`, { 
-                header: {
-                    withCredentials: true
-                },
-                body: {
-                    username: this.state.username, 
-                    password: this.state.password 
-                }
+                withCredentials: true,
+                username: this.state.username, 
+                password: this.state.password 
             }).then(response => {
                 if (response.status === 200) {
                     return this.props.history.push({ pathname: "/app" })
