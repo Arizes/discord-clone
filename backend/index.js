@@ -39,7 +39,8 @@ app.use(session( {
   resave: false,
   saveUninitialized: false,
   name: "auth",
-  store: new Store({mongooseConnection: mongoose.connection })
+  store: new Store({mongooseConnection: mongoose.connection }),
+  samesite: "none"
 }))
 
 app.use(passport.initialize());
@@ -48,11 +49,12 @@ app.use(passport.session());
 app.use("/api", router)
 
 app.use("*", async (req, res, next) => {
-	res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Credentials', "http://localhost:3000");
+  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
 	next();
 });
 
-const PORT = 3000 || process.env.PORT
+const PORT = 3001 || process.env.PORT
 app.listen(PORT, () => {
   console.log(`Mixing it up on port ${PORT}`)
 });

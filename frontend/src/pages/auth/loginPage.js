@@ -6,7 +6,7 @@ import "../assets/loginStyle.css"
 class loginPage extends Component {
 //<svg className="cross" width="24" height="24" viewBox="0 0 24 24" onClick={this.deleteThis}><path fill="currentColor" d="M18.4 4L12 10.4L5.6 4L4 5.6L10.4 12L4 18.4L5.6 20L12 13.6L18.4 20L20 18.4L13.6 12L20 5.6L18.4 4Z"></path></svg>
     async componentDidMount() {
-        await axios.get(`http://localhost:3001/api/auth`,{ header: { withCredentials: true }}).then(response => {
+        await axios.get(`http://localhost:3001/api/auth`,{ withCredentials: true }).then(response => {
             if (response.status === 200) return this.props.history.push({ pathname: "/app" })
             else return;
         }).catch(err => {
@@ -52,10 +52,11 @@ class loginPage extends Component {
             document.getElementById("noDisplayUsername").textContent = " "
         }
         if (!this.state.username || !this.state.password) return;
-        console.log("here")
             //let auth = authenticate(this.state.username, this.state.password)
             axios.post(`http://localhost:3001/api/auth/login`, { 
-                withCredentials: true,
+                header: {
+                    "Access-Control-Allow-Origin": "http://localhost:3000"
+                },
                 username: this.state.username, 
                 password: this.state.password 
             }).then(response => {
@@ -70,6 +71,7 @@ class loginPage extends Component {
                 }
             }).catch(err => {
                 if (err) {
+                    console.log(err)
                     const passElement = document.getElementById("passwordInputBox")
                     passElement.classList.add("redOverlay");
                     const userElement = document.getElementById("usernameInputBox")
