@@ -26,21 +26,22 @@ mongoose.connect("mongodb+srv://arize:arize@cluster0.ig7ih.mongodb.net/data", {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(cors({
   origin: "http://localhost:3000",
   credentials: true,
 }))
+
 app.use(cookieParser());
 app.use(session({
   secret: 'n@arize@',
   cookie: {
     maxAge: 86400000,
-    path: "/"
   },
   resave: false,
   saveUninitialized: false,
   name: "auth",
-  sameSite: "none"
+  samesite: "none"
   })
 );
 
@@ -50,9 +51,10 @@ app.use(passport.session());
 app.use("/api", router)
 
 app.use("*", async (req, res, next) => {
-	res.setHeader("access-control-allow-origin", "*");
+	res.setHeader('Access-Control-Allow-Credentials', true);
 	next();
 });
+
 // app.get("/", (req, res) => {
 //   res.sendFile(join(__dirname, "..", "frontend", "public", "index.html"));
 // });

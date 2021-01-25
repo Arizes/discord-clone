@@ -5,7 +5,7 @@ body {
     letter-spacing: 0.02em;
 }
 .background {
-    background: url("download.png") no-repeat center center fixed;
+    background: url("download1.png") no-repeat center center fixed;
     top: 0px;
     left: 0px;
     width: 100%;
@@ -76,6 +76,15 @@ body {
     user-select: none;
     top: 281px;
     left: 348px;
+    animation: zoominoutsinglefeatured 1s forwards;
+}
+@keyframes zoominoutsinglefeatured {
+    0% {
+        transform: scale(.987,.987);
+    }
+    100% {
+        transform: scale(1,1);
+    }
 }
 .login-btn {
     position: relative;
@@ -140,10 +149,11 @@ body {
     position: relative;
     color: #fff;
     margin-bottom: 8px;
+    font-family: Whitney Semibold;
     font-size: 24px;
     line-height: 30px;
     text-align: center;
-    font-weight: 510 !important;
+    font-weight: 500 !important;
     font-style: normal;
     outline: 0;
     top: -2px;
@@ -188,7 +198,8 @@ body {
 .lighttext {
     color: var(--lightgreytext);
     padding-right: 5px;
-    font-weight: 400;
+    font-family: Whitney Light;
+    font-weight: 500;
     opacity: 1;
 }
 .margintop {
@@ -199,23 +210,22 @@ body {
 }
 .boxSurround {
     width: 784px;
+    height: 420px;
 }
 .rightside {
     position: absolute;
     justify-content: center;
-    top: 385px;
-    left: 830px;
+    top: 100px;
+    left: 475px;
 }
 .fixbutton {
-    justify-content: center;
-    margin-top: 20px;
-    left: 2px;
-    width: 270px;
-    height: 40px;
+    width: 120px;
+    height: 60px;
+    margin: 10px;
 }
 .noDisplay {
     display: none;
-    font-family: Whitney;
+    font-family: Whitney !important;
     font-style: italic;
     font-size: 12px;
     font-weight: 500;
@@ -241,4 +251,38 @@ body {
 }
 .button0 {
     position: absolute;
+}
+.spanClose {
+    z-index: 10;
+}
+.cross{
+    height: 24px;
+    width: 24px;
+}
+.notdiscordbox {
+    position: absolute;
+    color: #f04747;
+    top: 390px;
+    font-size: 14px;
+    left: 200px;
+    font-family: Whitney;
+}
+.profileIcons {
+    display: inline;
+    user-select: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    justify-content: center;
+    transition: background-color, .17s ease-in-out;
+}
+.iconSize {
+    height: 40px;
+    width: 40px;
+}
+.rightsideText {
+    position: relative;
+    left: -10px;
 }

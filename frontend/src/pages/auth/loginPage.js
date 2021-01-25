@@ -4,11 +4,9 @@ const axios = require("axios");
 import "../assets/loginStyle.css"
 
 class loginPage extends Component {
-
+//<svg className="cross" width="24" height="24" viewBox="0 0 24 24" onClick={this.deleteThis}><path fill="currentColor" d="M18.4 4L12 10.4L5.6 4L4 5.6L10.4 12L4 18.4L5.6 20L12 13.6L18.4 20L20 18.4L13.6 12L20 5.6L18.4 4Z"></path></svg>
     async componentDidMount() {
-
-        await axios.get(`http://localhost:3001/api/auth`,{ withCredentials: true }).then(response => {
-            console.log(response)
+        await axios.get(`http://localhost:3001/api/auth`,{ header: { withCredentials: true }}).then(response => {
             if (response.status === 200) return this.props.history.push({ pathname: "/app" })
             else return;
         }).catch(err => {
@@ -57,9 +55,13 @@ class loginPage extends Component {
         console.log("here")
             //let auth = authenticate(this.state.username, this.state.password)
             axios.post(`http://localhost:3001/api/auth/login`, { 
-                withCredentials: true,
-                username: this.state.username, 
-                password: this.state.password 
+                header: {
+                    withCredentials: true
+                },
+                body: {
+                    username: this.state.username, 
+                    password: this.state.password 
+                }
             }).then(response => {
                 if (response.status === 200) {
                     return this.props.history.push({ pathname: "/app" })
@@ -82,6 +84,12 @@ class loginPage extends Component {
                 }
             })
         }
+        // deleteThis = (e) => {
+        //     const spanElement = document.getElementById("close")
+        //     if (!spanElement) return
+        //     console.log(spanElement)
+        //     spanElement.classList.add("spanClose");
+        // }
     render () {
 
         return (
@@ -107,11 +115,16 @@ class loginPage extends Component {
                             <div className="smalltext"><span className="lighttext">Need an account?</span><span className="link font14" onClick={() => this.props.history.push({ pathname: "/register" })}>Register</span></div>
                         </form>
                     </div>
-                </div>
+
                 <div className="rightside">
-                    <div className="white-title ">Developed by Arize!</div>
-                    <div className="greytext font16">To learn more join my discord server</div>
-                    <button className="bluebtn btnhover btnactive fixbutton" onClick={() => window.open("https://discord.gg/ZuAtb29")}>Join</button>
+                    <div className="rightsideText">
+                        <div className="white-title ">Developed by Arize!</div>
+                        <div className="greytext font16">Coded using MongoDb, Express, ReactJs, NodeJs, Html, Css and Javascript</div>
+                    </div>
+                    <button className="bluebtn btnhover btnactive fixbutton" onClick={() => window.open("https://discord.gg/ZuAtb29")}><img className="iconSize profileIcons" src="../assets/discord.png" /></button>
+                    <button className="bluebtn btnhover btnactive fixbutton" onClick={() => window.open("https://github.com/Arizes")}><img className="iconSize githubProfileButton profileIcons" src="../assets/github.png" /></button>
+                </div>
+                <span className="notdiscordbox">Note: This is not the actual discord! This is just a personal project.</span>
                 </div>
             </div>
         );

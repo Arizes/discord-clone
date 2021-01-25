@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import "../assets/registerStyle.css"
+import { motion } from "framer-motion";
 
 export default class register extends Component {
 
@@ -7,16 +8,6 @@ export default class register extends Component {
         username: "",
         password:  "",
 
-    }
-    componentDidMount() {
-        let link = document.createElement("link")
-        link.rel = "stylesheet"
-        link.href = "./assets/loginStyle.css"
-        document.head.appendChild(link)
-        let link2 = document.createElement("link")
-        link2.rel = "stylesheet"
-        link2.href = "./assets/registerStyle.css"
-        document.head.appendChild(link2)
     }
     authenticateUser = (e) => {
         e.preventDefault();
@@ -42,7 +33,7 @@ export default class register extends Component {
             <div className="background">
                 <title>Register Page</title>
                 <img src="https://discord.com/assets/192cb9459cbc0f9e73e2591b700f1857.svg" className="discord-img" />
-                <div className="boxSurround-register">
+                <motion.div className="boxSurround-register" initial={{ opacity: 0.9 }} animate={{ opacity: 1, scale: [.987, 1] }} exit={{ opacity: 0 }}>
                     <div className="leftside">
                         <div className="white-title">Create an account</div>
                         <form onSubmit={this.authenticateUser} className="addtop">
@@ -61,7 +52,7 @@ export default class register extends Component {
                             <div className="smalltext"><span className="link" onClick={() => this.props.history.push({ pathname: "/" })}>Already have an account?</span></div>
                         </form>
                     </div>
-                </div>
+                </motion.div>
             </div>
         )
     }
