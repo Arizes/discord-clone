@@ -1,4 +1,8 @@
 # Discord Clone
+<br/>
+
+## Currently in development by Arize#0001!
+<br/>
 
 ### Languages and Frameworks used:
 <p>
@@ -11,6 +15,7 @@
 <img align="left" alt="MongoDB" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/mongodb/mongodb.png" />
 <img align="left" alt="GraphQL" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/graphql/graphql.png" />
 </p>
+<br/><br/><br/>
 
 <br/><br/><br/>
 

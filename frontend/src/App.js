@@ -1,16 +1,20 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
-import loginPage from "./pages/auth/loginPage.js";
-import app from "./pages/app.js";
-import register from "./pages/auth/register";
+import { Switch, Route, Redirect } from "react-router-dom";
+import loginPage from "./pages/loginPage.js";
+import appLoading from "./pages/appLoading.js";
+import register from "./pages/registerPage";
+import channelView from "./pages/channelView"
+import notFound from "./pages/notFound"
 
 function App() {
     return (
         <Switch>
             <Route path="/" exact component={loginPage} />
-            <Route path="/app" exact component={app} />
+            <Route path="/app" exact component={appLoading} />
+            <Route path="/channels/:id" exact component={channelView} />
+            <Route path="/channels/:id/:channelId" exact component={channelView} />
             <Route path="/register" exact component={register}/>
-            <Route />
+            <Route path="*" component={notFound} />
         </Switch>
     );
 };

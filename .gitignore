@@ -1,2 +1,7 @@
 frontend/node_modules
+fontend/build
+frontend/.eslintcache
 backend/node_modules
+.env
+.gitpod.Dockerfile
+.gitpod.yml

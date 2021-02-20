@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 const axios = require("axios")
+import "./assets/appLoading.css";
 
 class app extends Component {
     
@@ -8,15 +9,22 @@ class app extends Component {
             console.log(response)
             if (response.status !== 200) return this.props.history.push({ pathname: "/" })
             else return;
+        }).then(response => {
+            if (response.status === 200) {
+                setTimeout(() => {
+                    this.props.history.push({ pathname: "/channels/@me" })
+                }, 2000)
+            }
         }).catch(err => {
             if (err) return this.props.history.push({ pathname: "/" })
         })
     }
-
     render() {
         return (
-            <div>
-                <h1>A title</h1>
+            <div className="dark-background">
+                <div className="loadingImg">
+                    <img src="https://cdn.discordapp.com/attachments/414258067870449665/445736475158380544/discord.gif" />
+                </div>
             </div>
         )
     }

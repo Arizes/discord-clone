@@ -1,60 +1,62 @@
-const express  = require('express');
-const app      = express();
-const session  = require('express-session');
-const Store    = require('connect-mongo')(session);
+require("dotenv").config()
+const express = require('express');
+const app = express();
+const session = require('express-session');
+const Store = require('connect-mongo')(session);
 const mongoose = require("mongoose");
-const cors     = require("cors");
-const path     = require("path")
-const passport = require('passport');
+const cors = require("cors");
+const bodyParser = require('body-parser');
 require("./passport/passport-singin")
+const passport = require('passport');
+const { graphqlHTTP } = require("express-graphql")
+const RootSchema = require("./graphql/index")
+const routes = require("./routes/index");
 
-/**
- * Routes
- */
-const router = require("./routes/index")
-
-mongoose.connect("mongodb+srv://arize:arize@cluster0.ig7ih.mongodb.net/data", { 
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true
-});
+// Connecting to Mongo Database
+mongoose.connect(process.env.MongoUri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 
 // let options = { babel: {presets: ['@babel/preset-react', [ '@babel/preset-env', {'targets': {'node': 'current'}}]]} }
 // app.set("views", __dirname + "/pages" );
 // app.set("view engine", "jsx");
 // app.engine('jsx', require('express-react-views').createEngine(options));
 
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
+app.use(bodyParser.json()); // parse application/json
 
-app.use(cors({
-  origin: ['http://localhost:3000'],
-  credentials: true,
-}))
+// Setting up Cors to accept requests and redirects to the origin
+app.use( cors({ origin: 'http://localhost:3000', credentials: true }) );
 
-app.use(session( {
+app.use(session({
   secret: 'secret',
-  cookie: {
-      maxAge: 60000 * 10 * 24
-  },
+  name: "auth",
+  maxAge: 60000 * 60 * 24,
   resave: false,
   saveUninitialized: false,
-  name: "auth",
-  store: new Store({mongooseConnection: mongoose.connection }),
-  samesite: "none"
-}))
+  //store: new Store({ mongooseConnection: mongoose.connection })
+})
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/api", router)
+app.use("/api", routes)
+app.use("/graphql", graphqlHTTP({ graphiql: true, schema: RootSchema }) )
 
-app.use("*", async (req, res, next) => {
-  res.setHeader('Access-Control-Allow-Credentials', "http://localhost:3000");
-  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
-	next();
+app.use(function (req, res, next) {
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'Origin,X-Requested-With,content-type,set-cookie');
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  // Pass to next layer of middleware
+  next();
 });
 
-const PORT = 3001 || process.env.PORT
-app.listen(PORT, () => {
-  console.log(`Mixing it up on port ${PORT}`)
+const PORT = process.env.PORT || 3001
+app.listen(PORT, () => { 
+  console.log(`Running on port ${PORT}`) 
 });

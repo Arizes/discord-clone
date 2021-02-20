@@ -91,6 +91,7 @@ body {
     cursor: pointer;
     width: 414px;
     height: 44px;
+    font-family: Whitney Semibold;
     margin-bottom: 8px;
     padding: 10px;
     border-radius: 3px;
@@ -100,7 +101,7 @@ body {
     background-color: var(--blurple);
     color: #fff;
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 500;
     transition: background-color .17s ease,color .17s ease;
 }
 .bluebtn {

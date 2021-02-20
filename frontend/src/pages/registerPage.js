@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import "../assets/registerStyle.css"
+import "./assets/registerStyle.css"
 import { motion } from "framer-motion";
 
 export default class register extends Component {
