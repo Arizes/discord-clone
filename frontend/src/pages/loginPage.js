@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { authenticate } from "../util/api";
 const axios = require("axios");
-import "./assets/loginStyle.css"
+import "./assets/loginStyle.css";
 
 class loginPage extends Component {
 
@@ -9,62 +9,57 @@ class loginPage extends Component {
     async componentDidMount() {
         await axios.get(`http://localhost:3001/api/auth`, { withCredentials: true })
         .then(response => {
-            if (response.status === 200) return this.props.history.push({ pathname: "/app" })
+            if (response.status === 200) return this.props.history.push({ pathname: "/app" });
         }).catch(err => { 
             if (err) return;
-        })
-    }
+        });
+    };
 
     // Setting empty state values, to hold data temporarily
     state = {
         username: "",
         password: "",
-    }
+    };
 
     // Handling the update event of input fields by updating the state with the new input value
-    changeHandler = (event) => this.setState({ [event.target.name]: event.target.value })
+    changeHandler = (event) => this.setState({ [event.target.name]: event.target.value });
     
     // Event for when the Login button is clicked to authenticate
     authenticateUser = (e) => {
         e.preventDefault();
 
-        const passwordElement = document.getElementById("passwordInputBox")
-        const userElement = document.getElementById("usernameInputBox")
+        const passwordElement = document.getElementById("passwordInputBox");
+        const userElement = document.getElementById("usernameInputBox");
 
         function changeState(element, addOrRemove, text) {
             if (addOrRemove) {
                 element.classList.add("redOverlay");
-                element.children[0].children[1].textContent = text
-                element.children[1].classList.add("redOverlay")
+                element.children[0].children[1].textContent = text;
+                element.children[1].classList.add("redOverlay");
             }
             else {
                 element.classList.remove("redOverlay");
-                element.children[1].classList.remove("redOverlay")
-                element.children[0].children[1].textContent = text
-            }
+                element.children[1].classList.remove("redOverlay");
+                element.children[0].children[1].textContent = text;
+            };
         };
 
-        if (!this.state.password) changeState(passwordElement, true, " - This field is required")
-        else changeState(passwordElement, false, "")
-
-        if (!this.state.username) changeState(userElement, true, " - This field is required")
-        else changeState(userElement, false, "")
+        if (!this.state.password) changeState(passwordElement, true, " - This field is required");
+        else changeState(passwordElement, false, "");
+''
+        if (!this.state.username) changeState(userElement, true, " - This field is required");
+        else changeState(userElement, false, "");
 
         if (!this.state.username || !this.state.password) return;
 
         axios.post(`http://localhost:3001/api/auth/login`, { username: this.state.username, password: this.state.password, withCredentials: true })
             .then(response => {
-                if (response.status === 200) return this.props.history.push({ pathname: "/app" })
+                if (response.status === 200) return this.props.history.push({ pathname: "/app" });
             })
             .catch(err => {
                 if (err) {
-                    passwordElement.classList.add("redOverlay");
-                    passwordElement.children[0].children[1].textContent = " - Login or password is invalid"
-                    passwordElement.children[1].classList.add("redOverlay")
-
-                    userElement.classList.add("redOverlay");
-                    userElement.children[0].children[1].textContent = " - Login or password is invalid"
-                    userElement.children[1].classList.add("redOverlay")
+                    changeState(passwordElement, true, " - Login or password is invalid");
+                    changeState(userElement, true, " - Login or password is invalid");
                 }
             })
         }
@@ -104,7 +99,7 @@ class loginPage extends Component {
                 </div>
             </div>
         );
-    }
-}
+    };
+};
 
 export default loginPage;
