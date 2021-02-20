@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const userSchema = require("../models/userAuth");
 
 router.get("/", middleware.data);
+
 router.post('/login', passport.authenticate('local', { session: true }), middleware.auth);
 
 router.get("/logout", middleware.logout);
