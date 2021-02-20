@@ -1,7 +1,4 @@
-# Discord Clone
-<br/>
-
-## Currently in development by Arize#0001!
+## Discord Clone 
 <br/>
 
 ### Languages and Frameworks used:
@@ -15,19 +12,19 @@
 <img align="left" alt="MongoDB" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/mongodb/mongodb.png" />
 <img align="left" alt="GraphQL" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/graphql/graphql.png" />
 </p>
-<br/><br/><br/>
 
-<br/><br/><br/>
+<br/><br/>
 
 #### run instructions
 
-<p style="font-size:10px">
+```console
+$ cd frontend
+$ npm run start
 
-**1.** Download the source code and open in VSC
-<br/>
+// CTRL + SHIFT + 5 (open new terminal)
 
-**2.** Enter the frontend folder - `cd frontend` and run it using `npm run start`
-<br/>
+$ cd backend
+$ node index.js
+```
 
-**3.** Enter the backend folder - `cd backend` and run it using `node index.js`
-<p/>
+#### Currently in development by Arize#0001!
