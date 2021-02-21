@@ -20,8 +20,8 @@ mongoose.connect(process.env.MongoUri, { useNewUrlParser: true, useCreateIndex: 
 // app.set("view engine", "jsx");
 // app.engine('jsx', require('express-react-views').createEngine(options));
 
-app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
-app.use(bodyParser.json()); // parse application/json
+app.use(express.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
+app.use(express.json()); // parse application/json
 
 // Setting up Cors to accept requests and redirects to the origin
 app.use( cors({ origin: 'http://localhost:3000', credentials: true }) );
@@ -29,7 +29,10 @@ app.use( cors({ origin: 'http://localhost:3000', credentials: true }) );
 app.use(session({
   secret: 'secret',
   name: "auth",
-  maxAge: 60000 * 60 * 24,
+  cookie: {
+    maxAge: 60000 * 60 * 24,
+    secure: true,
+  },
   resave: false,
   saveUninitialized: false,
   //store: new Store({ mongooseConnection: mongoose.connection })

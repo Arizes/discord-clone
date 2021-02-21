@@ -11,32 +11,32 @@
 
 snowflakeUniqueNum = new Map();
 
-export async function createSnowflake(workerNum) {
+async function createSnowflake(workerNum) {
     
     // Simple system to prevent duplicate ID's
     let processNum, incrementNum;
 
-    let searchCahce = await snowflakeUniqueNum.get(workerNum)
+    let searchCahce = await snowflakeUniqueNum.get(workerNum);
     if (!searchCahce) {
         processNum = 1; incrementNum = 1;
-        snowflakeUniqueNum.set(workerNum, { processNum, incrementNum })
+        snowflakeUniqueNum.set(workerNum, { processNum, incrementNum });
     }
     else {
         incrementNum = searchCahce.incrementNum++;
         processNum = searchCahce.processNum;
-        await snowflakeUniqueNum.delete(workerNum)
+        await snowflakeUniqueNum.delete(workerNum);
 
         if (incrementNum >= 4095) {
             incrementNum = 0;
-            processNum++
+            processNum++;
             
             if (processNum >= 31) {
                 processNum = 0;
-                workerNum++
+                workerNum++;
             };
         };
 
-        snowflakeUniqueNum.set(workerNum, { processNum, incrementNum })
+        snowflakeUniqueNum.set(workerNum, { processNum, incrementNum });
     };
 
     // The epoch is a timestamp, I chose it to be when I started this project
@@ -48,11 +48,11 @@ export async function createSnowflake(workerNum) {
     // -- Working out the first 42 bits to the --
 
     // Converting milliseconds since epoch to binary
-    let timestampBit = Number(sinceEpoch).toString()
+    let timestampBit = Number(sinceEpoch).toString();
 
     // Checking if the converted bit number is less than the required 42 bits, if so, we add zeros to the beginning
     if (timestampBit.toString().length < 42) {
-        timestampBit = timestampBit.toString().padStart(42, "0")
+        timestampBit = timestampBit.toString().padStart(42, "0");
     };
 
 
@@ -87,11 +87,13 @@ export async function createSnowflake(workerNum) {
     };
 
     // Converting the 42+5+5+12 bits into a number
-    let snowflakeID = parseInt(String(timestampBit + workerBit + processBit + incrementBit), 2)
+    let snowflakeID = parseInt(String(timestampBit + workerBit + processBit + incrementBit), 2);
 
-    return snowflakeID
+    return snowflakeID;
 };
 
-export async function convertSnowflake(id) {
-    return ( (id/4139304) + 1609459200000 )
-}
+async function convertSnowflake(id) {
+    return ( (id/4139304) + 1609459200000 );
+};
+
+module.exports = { createSnowflake, convertSnowflake }
