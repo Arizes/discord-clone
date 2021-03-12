@@ -15,7 +15,9 @@
 
 <br/><br/>
 
-#### run instructions
+### Developing this may take a while...
+
+#### Run instructions
 
 ```console
 $ cd frontend
@@ -27,4 +29,4 @@ $ cd backend
 $ node index.js
 ```
 
-#### Currently in development by Arize#0001!
+#### Discord - Arize#0001
