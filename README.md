@@ -15,7 +15,7 @@
 
 <br/><br/>
 
-### Developing this may take a while...
+### Continuing project soon
 
 #### Run instructions
 
@@ -29,4 +29,4 @@ $ cd backend
 $ node index.js
 ```
 
-#### Discord - Arize#0001
+#### Discord - Arize#8581
